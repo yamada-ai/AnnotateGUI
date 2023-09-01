@@ -1,0 +1,54 @@
+version: '3'
+services:
+  annback:
+    build: ./AnnServer
+    # restart: always
+    volumes:
+      - ./AnnServer:/app
+      - ./scenarios:/scenarios
+      - ./dialogues:/dialogues
+    ports:
+      - 8080:8080
+    networks:
+      - ann-network
+    working_dir: /app
+    command: uvicorn AnnServer.main:app --reload  --host 0.0.0.0 --port 8080
+    # depends_on:
+    #   - db
+
+
+  annfront:
+    build: ./AnnFront
+    tty: true
+    volumes:
+      - ./AnnFront:/app
+      
+    ports:
+      - 5173:5173
+    networks:
+      - ann-network
+    working_dir: /app
+    # depends_on:
+    #   - annback
+    command: yarn dev
+  
+  
+  db:
+    image: mysql:8.0.14
+    restart: always
+    ports:
+      - 13306:3306
+    volumes:
+      - ./data/db:/var/lib/mysql
+    networks:
+      - ann-network
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chatgui-patient-test
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    command:  --default-authentication-plugin=mysql_native_password
+
+networks:
+  ann-network:
+    driver: bridge
