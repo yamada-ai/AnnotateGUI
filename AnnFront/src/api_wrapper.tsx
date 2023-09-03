@@ -25,3 +25,9 @@ export async function getDialogue(fname:string):Promise<any>{
     const data = JSON.parse(response.data)
     return data
 }
+
+export async function getScenario(fname: string): Promise<any> {
+    const response = await client.get("/scenario/" + fname)
+    const data = JSON.parse(response.data)
+    return data
+}

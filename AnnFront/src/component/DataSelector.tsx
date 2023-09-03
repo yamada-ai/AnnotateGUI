@@ -36,7 +36,7 @@ export const DataSelector = () => {
             </p>
         </div>
         <div className="columns is-centered">
-            <div className="column is-11">
+            <div className="column is-11 px-0">
                     {list}
             </div>
         </div>
