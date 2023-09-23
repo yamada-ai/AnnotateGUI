@@ -4,7 +4,7 @@ import { AnnRoom } from "./AnnRoom";
 export const AnnGUI = () => {
     return(
         <>
-            <div className="columns" style={{minHeight:"103vh"}}>
+            <div className="columns" style={{minHeight:"100vh"}}>
                 <div className="column is-2 has-background-black-ter pr-0" style={{"minWidth":"200px"}}>
                     <DataSelector/>
                 </div>

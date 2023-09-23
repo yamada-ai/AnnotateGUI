@@ -10,7 +10,7 @@ def format_filename(fname_raw:str):
 def handler():
     try:
         res = {
-            "dialogues" : [ format_filename(fname_raw) for fname_raw in os.listdir(dialogue_path)]
+            "dialogues" : sorted([ format_filename(fname_raw) for fname_raw in os.listdir(dialogue_path)])
         }
         return convert_for_response(res)    
     except Exception as e:
